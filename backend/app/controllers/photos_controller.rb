@@ -1,21 +1,29 @@
 class PhotosController < ApplicationController
     
-    def create 
-       photo = Photo.new(photo_params)
-       photo.save
+    def show
+       render json: Photo.find(params[:id])
+    end
+    
+    def create
+       
+       photo = Photo.create(photo_params)
+    #   photo.save
        render json: photo
     end 
     
     def index
         photos = Photo.all
-        render json: photos.to_json(include: {
-            comments: {only: [:content] },
-            user: {only: [:name]}
-        })
+        render json: photos
+    end 
+    
+    def destroy
+        
     end 
     
    
     def photo_params
-        params.require(:photo).permit(:content, :image, :user_id)
+       
+
+        params.require(:photo).permit(:title, :image, :name)
     end 
 end 

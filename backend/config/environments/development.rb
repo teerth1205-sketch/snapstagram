@@ -45,7 +45,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
   
   config.active_storage.service = :local
-  
+  Rails.application.routes.default_url_options[:host] = "https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com"
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

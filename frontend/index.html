@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
+    <script type="text/javascript" src="./src/models/photo.js"></script>
     <script type="text/javascript" src="src/index.js"></script>
     <body>
-        <form id="photo">
+        <form accept-charset="UTF-8" id="photo" enctype="multipart/form-data">
             <div>
-                <label for="content">Select image:</label>
-                <input type="text" name="content"/>
+                <label for="title">Name Pic Title:</label>
+                <input id="title" type="text" name="photo[title]"/>
                 <label for="img">Select image:</label>
-                <input type="file" id="img" name="img" accept="image/*">
+                <input type="file" id="image" name="photo[image]" accept="image/*">
+                <label for="name">Input name:</label>
+                <input id="name" type="text" name="photo[name]"/>
                 <input type="submit" value="Submit"/>
             </div>
         </form>
+        
+        <div id="header"></div>
     </body>
 </html>
