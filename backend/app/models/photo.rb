@@ -6,7 +6,12 @@ class Photo < ApplicationRecord
     has_one_attached:image
     
     def name=(name)
-        self.user = User.find_by(name: name)
+        if User.find_by(name: name)
+            self.user = User.find_by(name: name)
+        else
+            User.create(name: name)
+            self.user = User.find_by(name: name)
+        end 
     end 
     
     def image_url

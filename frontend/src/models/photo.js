@@ -3,7 +3,7 @@ class Photo {
     
     constructor(data) {
         this.id = data.id
-        this.image = data.image
+        this.image = data.image_url
         this.title = data.title
         this.save
     }
