@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     loadPics();
-    document.getElementById('photo').addEventListener('submit', formData);
-    document.getElementById('comment').addEventListener('submit', commentSubmit);
+    document.getElementById('photo').addEventListener('submit', formData)
 })
 
 async function loadPics() {
@@ -10,7 +9,7 @@ async function loadPics() {
     let photos = await response.json();
     
     photos.forEach(data => {
-      
+       new Photo(data)
        let div = document.createElement("div")
        let img = document.createElement("img");
        let h3 = document.createElement("h3");
@@ -31,25 +30,32 @@ async function loadPics() {
        src.appendChild(center);
        
        let f = document.createElement("form");
-f.setAttribute('id',"comment");
+       f.setAttribute('id', data.id)
+       f.addEventListener('submit', e => commentSubmit(e, data.id));
 
 let l = document.createElement("label");
 l.setAttribute('for', 'comment')
 l.innerText = 'Write Comment'
 
 let i = document.createElement("input"); 
-i.setAttribute('id', 'com')//input element, text
+i.setAttribute('class','com')//input element, text
 i.setAttribute('type',"text");
-i.setAttribute('name',"comment");
+i.setAttribute('name',"content");
+
+let u = document.createElement("input"); 
+u.setAttribute('class','user')//input element, text
+u.setAttribute('type',"text");
+u.setAttribute('name',"name");
 
 let s = document.createElement("input"); //input element, Submit button
 s.setAttribute('type',"submit");
 s.setAttribute('value',"Submit");
 
+f.appendChild(u);
 f.appendChild(l);
 f.appendChild(i);
 f.appendChild(s);
-       center.appendChild(f)
+center.appendChild(f)
     })
     
     
@@ -96,14 +102,16 @@ async function formData(e) {
         // }, 
         // body: data
 
-async function commentSubmit(e)  {
+async function commentSubmit(e, id)  {
     e.preventDefault();
     
-   let comment = document.getElementById('com').value
-   let photo_id = parseInt(document.querySelector('p').value)
+   let content = e.target.getElementsByClassName('com')[0].value
+   let name = e.target.getElementsByClassName('user')[0].value
+   let photo_id = id
    let strongParams = {
         comment: {
-            comment, 
+            content,
+            name, 
             photo_id
         }
         
@@ -112,13 +120,18 @@ async function commentSubmit(e)  {
   const config = {
     method: "POST",
     headers: {
-      //"Authorization": localStorage.getItem("token"),
-      "Accept": "application/json"
+      "Accept": "application/json",
+      "Content-Type": "application/json"
     },
-    body: strongParams
+    body: JSON.stringify(strongParams)
   }
    return fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/comments', config)
-    .then(res => res.json());
+    .then(res => res.json()).then(data => {
+      let h5 =  document.createElement("h5")
+      h5.innerText = `${data.user_id} : ${data.content}`
+      let form = document.getElementById(data.photo_id)
+      form.appendChild(h5)// create comment element and append it to the dom
+    });
 } 
     
 
