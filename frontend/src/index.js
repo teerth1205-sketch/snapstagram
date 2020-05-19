@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-    loadPics();
+    createUsers();
+   // loadPics();
     document.getElementById('photo').addEventListener('submit', formData)
+   
 })
 
 async function loadPics() {
@@ -9,53 +11,60 @@ async function loadPics() {
     let photos = await response.json();
     
     photos.forEach(data => {
-       new Photo(data)
-       let div = document.createElement("div")
-       let img = document.createElement("img");
-       let h3 = document.createElement("h3");
-       let center = document.createElement("center");
-       let h5 = document.createElement("h5");
-       let ids = document.createElement("p");
-       ids.innerText = `${data.id}`;
-       ids.style.visibility = "hidden";
-       h3.innerText = data.title;
-       h5.innerText =  data && data.user ? data.user.name : null;
-       img.src = data.image_url;
-       let src = document.getElementById("header");
-       div.appendChild(ids);
-       div.appendChild(h3);
-       div.appendChild(h5);
-       div.appendChild(img);
-       center.appendChild(div);
-       src.appendChild(center);
+       let pho = new Photo(data);
+       pho.create_card();
+      
+    //   let div = document.createElement("div");
+    //   div.setAttribute('class', "card");
+    //   let img = document.createElement("img");
+    //   img.setAttribute('class', "card_image")
+    //   let h3 = document.createElement("h3");
+    //   let center = document.createElement("center");
+    //   let h5 = document.createElement("h5");
+    //   let ids = document.createElement("p");
+    //   ids.innerText = `${data.id}`;
+    //   ids.style.visibility = "hidden";
+    //   h3.innerText = data.title;
+    //   h5.innerText =  data && data.user ? data.user.name : null;
+    //   img.src = data.image_url;
+    //   let src = document.getElementById("header");
+    //   div.appendChild(ids);
+    //   div.appendChild(h3);
+    //   div.appendChild(h5);
+    //   div.appendChild(img);
+    //   center.appendChild(div);
+    //   src.appendChild(center);
        
-       let f = document.createElement("form");
-       f.setAttribute('id', data.id)
-       f.addEventListener('submit', e => commentSubmit(e, data.id));
+//       let f = document.createElement("form");
+//       f.setAttribute('id', data.id)
+//       f.addEventListener('submit', e => commentSubmit(e, data.id));
+let x = document.createElement('button')
+let g = document.getElementById(`${data.id}`)
+g.appendChild(x)
+x.addEventListener('click', () => pho.renderComments())  
+// let l = document.createElement("label");
+// l.setAttribute('for', 'comment')
+// l.innerText = 'Write Comment'
 
-let l = document.createElement("label");
-l.setAttribute('for', 'comment')
-l.innerText = 'Write Comment'
+// let i = document.createElement("input"); 
+// i.setAttribute('class','com')//input element, text
+// i.setAttribute('type',"text");
+// i.setAttribute('name',"content");
 
-let i = document.createElement("input"); 
-i.setAttribute('class','com')//input element, text
-i.setAttribute('type',"text");
-i.setAttribute('name',"content");
+// let u = document.createElement("input"); 
+// u.setAttribute('class','user')//input element, text
+// u.setAttribute('type',"text");
+// u.setAttribute('name',"name");
 
-let u = document.createElement("input"); 
-u.setAttribute('class','user')//input element, text
-u.setAttribute('type',"text");
-u.setAttribute('name',"name");
+// let s = document.createElement("input"); //input element, Submit button
+// s.setAttribute('type',"submit");
+// s.setAttribute('value',"Submit");
 
-let s = document.createElement("input"); //input element, Submit button
-s.setAttribute('type',"submit");
-s.setAttribute('value',"Submit");
-
-f.appendChild(u);
-f.appendChild(l);
-f.appendChild(i);
-f.appendChild(s);
-center.appendChild(f)
+// f.appendChild(u);
+// f.appendChild(l);
+// f.appendChild(i);
+// f.appendChild(s);
+// //  center.appendChild(f)
     })
     
     
@@ -133,5 +142,15 @@ async function commentSubmit(e, id)  {
       form.appendChild(h5)// create comment element and append it to the dom
     });
 } 
-    
+
+async function createUsers() {
+   
+    let response = await fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/users');
+    let users = await response.json();
+    console.log(users)
+    users.forEach(data => {
+        let user = new User(data)
+    })
+   loadPics();
+}
 

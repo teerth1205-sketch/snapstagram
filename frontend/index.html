@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        .card {
+            background: lightgreen;
+            width: 500px;
+            height: 500px;
+           /*padding: 3rem;*/
+        }
+        
+        .card_image {
+            max-width: 100%;
+            max-height: 70%;
+        }
+    </style>
+    <script type="text/javascript" src="./src/models/user.js"></script>
+    <script type="text/javascript" src="./src/models/comment.js"></script>
     <script type="text/javascript" src="./src/models/photo.js"></script>
     <script type="text/javascript" src="src/index.js"></script>
     <body>
         <center><h1>SNAPstaGram</h1></center>
-        <form accept-charset="UTF-8" id="photo" enctype="multipart/form-data">
+        <center>
+            <form accept-charset="UTF-8" id="photo" enctype="multipart/form-data">
             <div>
                 <label for="title">Name Pic Title:</label>
-                <input id="title" type="text" name="photo[title]"/>
+                <input id="title" type="text" name="photo[title]"/><br>
+                <br>
                 <label for="img">Select image:</label>
-                <input type="file" id="image" name="photo[image]" accept="image/*">
+                <input type="file" id="image" name="photo[image]" accept="image/*"><br>
+                <br>
                 <label for="name">Input name:</label>
-                <input id="name" type="text" name="photo[name]"/>
+                <input id="name" type="text" name="photo[name]"/><br>
                 <input type="submit" value="Submit"/>
             </div>
         </form>
+        </center>
         
         <div id="header"></div>
     </body>
