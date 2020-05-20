@@ -5,6 +5,10 @@ class Photo < ApplicationRecord
     
     has_one_attached:image
     
+    validates :title, presence: true
+    validates :image_url, presence: true
+    validates :user_id, presence: true
+    
     def name=(name)
         if User.find_by(name: name)
             self.user = User.find_by(name: name)

@@ -5,8 +5,9 @@ class Photo {
         this.id = data.id
         this.image = data.image_url
         this.title = data.title
-        this.comments = data.comments.map(x => new Comment(x))//`${x.user_id}: ${x.content}`)
+        this.comments = data.comments.map(x => new Comment(x))
         this.name =  data && data.user ? data.user.name : null;
+        this.toggled = false
         
     }
     
@@ -35,9 +36,11 @@ class Photo {
        div.appendChild(img);
        center.appendChild(div);
        src.appendChild(center);
-    
+        
         let f = document.createElement("form");
         f.setAttribute('id', this.id)
+        f.setAttribute("class", "forms")
+        f.setAttribute('onsubmit', "return validateForm()")
         f.addEventListener('submit', e => commentSubmit(e, this.id));
     
         let l = document.createElement("label");
@@ -66,20 +69,18 @@ class Photo {
     }
     
     renderComments() {
+        
+        if (this.toggled === false) {
         this.comments.forEach(data => {
             let h6 = data.render_html()
             let com = document.getElementById(this.id);
             com.appendChild(h6);
         })
-        // for (let i = this.comments.length; i >= 0; i--) {
-        // let h6  = this.comments[i].render_html()
-        //     // let h6 = document.createElement("h6");
-        //     // h6.innerText = this.comments[i];
-        //     let com = document.getElementById(this.id);
-        //      com.appendChild(h6);
-        // }
+        this.toggled = true
+        }
+       
         
     }
     
-   // <button onclick="myFunction()">Click me</button>
+  
 }

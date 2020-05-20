@@ -5,7 +5,6 @@
             background: lightgreen;
             width: 500px;
             height: 500px;
-           /*padding: 3rem;*/
         }
         
         .card_image {
@@ -20,7 +19,7 @@
     <body>
         <center><h1>SNAPstaGram</h1></center>
         <center>
-            <form accept-charset="UTF-8" id="photo" enctype="multipart/form-data">
+            <form accept-charset="UTF-8" name="mainForm" id="photo" enctype="multipart/form-data" onsubmit="return validateForm()">
             <div>
                 <label for="title">Name Pic Title:</label>
                 <input id="title" type="text" name="photo[title]"/><br>
