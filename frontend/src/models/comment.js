@@ -1,11 +1,19 @@
 class Comment {
+    
+    static all = []
+    
     constructor(data){
         this.id = data.id
         this.content = data.content
         this.photo_id = data.photo_id
         this.user_id = data.user_id
         this.toggled = false
+        this.save()
        
+    }
+    
+    save() {
+        Comment.all.push(this)
     }
     
     render_html() {

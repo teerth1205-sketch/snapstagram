@@ -8,6 +8,7 @@ class Photo {
         this.comments = data.comments.map(x => new Comment(x))
         this.name =  data && data.user ? data.user.name : null;
         this.toggled = false
+        this.save()
         
     }
     
@@ -40,7 +41,7 @@ class Photo {
         let f = document.createElement("form");
         f.setAttribute('id', this.id)
         f.setAttribute("class", "forms")
-        f.setAttribute('onsubmit', "return validateForm()")
+        //f.setAttribute('onsubmit', "return validateForm()")
         f.addEventListener('submit', e => commentSubmit(e, this.id));
     
         let l = document.createElement("label");

@@ -44,7 +44,17 @@ async function formData(e) {
     body: formDat
   }
   return fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/photos', config)
-    .then(res => res.json());
+    .then(res => res.json())
+    .then(data => {
+        let pho = new Photo(data)
+        document.getElementById('header').innerHTML = ''
+        //pho.create_card()
+        // let pho = new Photo(data)
+     Photo.all.forEach(photo => {
+            photo.create_card()
+     }) 
+        
+    });
 }
         
 
@@ -76,7 +86,23 @@ async function commentSubmit(e, id)  {
     body: JSON.stringify(strongParams)
   }
    return fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/comments', config)
-    .then(res => res.json()).then(data => {
+    .then(res => res.json())
+    .then(data => {
+        let com = new Comment(data)
+        
+        // Comment.all.forEach(comm => {
+             
+          let h6 = document.createElement("h6");
+        
+          h6.innerText = `${name}:${com.content}`;
+         
+             
+         
+             
+          let comms = document.getElementById(photo_id);
+              comms.appendChild(h6);
+        // })
+      
     
     });
   }
