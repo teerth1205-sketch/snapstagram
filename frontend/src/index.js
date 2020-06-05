@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     createUsers();
    // loadPics();
     document.getElementById('photo').addEventListener('submit', formData)
+    
    
 })
 
@@ -19,16 +20,44 @@ photos.forEach(data => {
 let x = document.createElement('button')
 x.setAttribute("class", "but")
 x.setAttribute("type", "button")
+x.innerText = "View Comments"
 let g = document.getElementById(`${data.id}`)
 g.appendChild(x)
 x.addEventListener('click', () => pho.renderComments())  
 
+
     })
-    
-    
+    let s = document.getElementById("search")
+    s.addEventListener('submit', searchPhoto )
+    let d =  document.createElement('div')
+    d.setAttribute('id', 'titles')
+s.appendChild(d)
 }
 
+function renderTitle(pho) {
+    pho.preventDefault
+    
+    let s = document.getElementById("titles")
+    let h6 = document.createElement("h6")
+    h6.innerText = pho
+    s.appendChild(h6)
+}
 
+function searchPhoto(e){
+    e.preventDefault()
+   let s =  document.getElementById('sear').value
+   let titles = Photo.all.filter(pho => pho.title.includes(s) )
+   let f = document.getElementById("titles")
+   f.innerHTML = ''
+   titles.forEach(pho => {renderTitle(pho.title)})
+   
+   
+}
+
+// function search() {
+//     let s = document.getElementById("search")
+//     s.addEventListener('submit', searchPhoto )
+// }
 
 async function formData(e) {
     e.preventDefault();
@@ -56,6 +85,8 @@ async function formData(e) {
         
     });
 }
+
+
         
 
 async function commentSubmit(e, id)  {
