@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 async function loadPics() {
    
-    let response = await fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/photos');
+    let response = await fetch('https://7056fcf58cf84c3f92b471b1992c1bf2.vfs.cloud9.us-east-2.amazonaws.com/photos');
     let photos = await response.json();
     
 photos.forEach(data => {
@@ -72,7 +72,7 @@ async function formData(e) {
     },
     body: formDat
   }
-  return fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/photos', config)
+  return fetch('https://7056fcf58cf84c3f92b471b1992c1bf2.vfs.cloud9.us-east-2.amazonaws.com/photos', config)
     .then(res => res.json())
     .then(data => {
         let pho = new Photo(data)
@@ -116,7 +116,7 @@ async function commentSubmit(e, id)  {
     },
     body: JSON.stringify(strongParams)
   }
-   return fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/comments', config)
+   return fetch('https://7056fcf58cf84c3f92b471b1992c1bf2.vfs.cloud9.us-east-2.amazonaws.com/comments', config)
     .then(res => res.json())
     .then(data => {
         let com = new Comment(data)
@@ -141,7 +141,7 @@ async function commentSubmit(e, id)  {
 
 async function createUsers() {
    
-    let response = await fetch('https://829535e57e074381a7aaea17ef9021a3.vfs.cloud9.us-east-2.amazonaws.com/users');
+    let response = await fetch('https://7056fcf58cf84c3f92b471b1992c1bf2.vfs.cloud9.us-east-2.amazonaws.com/users');
     let users = await response.json();
     console.log(users)
     users.forEach(data => {
